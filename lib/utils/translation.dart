@@ -17,7 +17,7 @@ class LocaleString extends Translations {
           'Sign Up': 'Εγγραφή',
           'Login': 'Είσοδος',
           'Welcome to The tour of the worlds recipe Here you can enjoy the best recipes from all over the world.':
-              'Καλώς ήρθατε στη συνταγή The tour of the worlds Εδώ μπορείτε να απολαύσετε τις καλύτερες συνταγές από όλο τον κόσμο.',
+              'Καλώς ήρθατε στο Tour de Recipe όπου εδώ μπορείτε να απολαύσετε τις καλύτερες συνταγές από όλο τον κόσμο.',
         }
       };
 }

@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'dart:developer';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import '../utils/responsive_layout.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,7 +18,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    List _isHovering = [false, false, false, false];
+    List isHovering = [false, false, false, false];
+    List isHoveringMiniMenu = [false, false, false, false];
     int _selectedScreenIndex = 0;
 
     // Generate a massive list of dummy products
@@ -36,7 +38,8 @@ class _HomePageState extends State<HomePage> {
     log(screenSize.toString());
     return Scaffold(
         backgroundColor: Colors.black,
-        bottomNavigationBar: ResponsiveLayout.isSmallScreen(context)
+        bottomNavigationBar: ResponsiveLayout.isSmallScreen(context) &&
+                defaultTargetPlatform == TargetPlatform.android
             ? BottomNavigationBar(
                 backgroundColor: const Color.fromARGB(69, 67, 67, 67),
                 currentIndex: _selectedScreenIndex,
@@ -92,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                               InkWell(
                                 onHover: (value) {
                                   setState(() {
-                                    _isHovering[0] = value;
+                                    isHovering[0] = value;
                                   });
                                 },
                                 onTap: () {},
@@ -108,6 +111,11 @@ class _HomePageState extends State<HomePage> {
                               SizedBox(width: screenSize.width / 20),
                               Flexible(
                                 child: InkWell(
+                                  onHover: (value) {
+                                    setState(() {
+                                      isHovering[1] = value;
+                                    });
+                                  },
                                   onTap: () {},
                                   child: Text(
                                     overflow: TextOverflow.ellipsis,
@@ -124,6 +132,11 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         InkWell(
+                          onHover: (value) {
+                            setState(() {
+                              isHovering[2] = value;
+                            });
+                          },
                           onTap: () {},
                           child: Text(
                             'Sign Up'.tr,
@@ -137,6 +150,11 @@ class _HomePageState extends State<HomePage> {
                           width: screenSize.width / 50,
                         ),
                         InkWell(
+                          onHover: (value) {
+                            setState(() {
+                              isHovering[3] = value;
+                            });
+                          },
                           onTap: () {},
                           child: Text(
                             'Login'.tr,
@@ -187,7 +205,8 @@ class _HomePageState extends State<HomePage> {
                     alignment: Alignment.center,
                     child: Text(
                       textAlign: TextAlign.center,
-                      'Welcome to The tour of the worlds recipe Here you can enjoy the best recipes from all over the world.',
+                      'Welcome to The tour of the worlds recipe Here you can enjoy the best recipes from all over the world.'
+                          .tr,
                       style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'Comfortaa',
@@ -198,6 +217,71 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
+                ResponsiveLayout.isSmallScreen(context)
+                    ? Positioned.fill(
+                        child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onHover: (value) {
+                                  setState(() {
+                                    isHoveringMiniMenu[0] = value;
+                                  });
+                                },
+                                onTap: () {},
+                                child: const Icon(
+                                  Icons.explore,
+                                  size: 30,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              InkWell(
+                                onHover: (value) {
+                                  setState(() {
+                                    isHoveringMiniMenu[1] = value;
+                                  });
+                                },
+                                onTap: () {},
+                                child: const Icon(
+                                  Icons.contact_mail,
+                                  size: 30,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              InkWell(
+                                onHover: (value) {
+                                  setState(() {
+                                    isHoveringMiniMenu[2] = value;
+                                  });
+                                },
+                                onTap: () {},
+                                child: const Icon(
+                                  Icons.app_registration,
+                                  size: 30,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              InkWell(
+                                onHover: (value) {
+                                  setState(() {
+                                    isHoveringMiniMenu[3] = value;
+                                  });
+                                },
+                                onTap: () {},
+                                child: const Icon(
+                                  Icons.login_outlined,
+                                  size: 30,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    : Container(),
               ],
             ),
             Expanded(
